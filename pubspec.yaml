@@ -42,6 +42,8 @@ dependencies:
   path_provider: ^2.0.11 # To store the generated PDF in the device
   permission_handler: ^10.0.0
   open_file: ^3.5.8
+  flutter_card_swiper: ^7.0.2
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
