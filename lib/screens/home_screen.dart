@@ -1,49 +1,44 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:open_file/open_file.dart';
+import 'package:resume_pdf_app/data/pastprojects.dart';
+
 import 'package:resume_pdf_app/screens/add_new_resume.dart';
+import 'package:resume_pdf_app/screens/pdf_preview_page.dart';
+import 'package:resume_pdf_app/models/resume_secrions.dart';
 
 class HomeScreen extends StatefulWidget {
-  final List<String> pdfPaths;
-
-  const HomeScreen({super.key, required this.pdfPaths});
+  
+   HomeScreen({ super.key});
+  
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // Mock list of resume data
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('My Resumes'), actions: []),
-      body: widget.pdfPaths.isEmpty
-          ? const Center(child: Text('No projects found.'))
+      appBar: AppBar(title: const Text('My Resumes')),
+      body: pastResumes.isEmpty
+          ? const Center(child: Text('No resumes found.'))
           : Padding(
               padding: const EdgeInsets.all(16.0),
               child: ListView.builder(
-                itemCount: widget.pdfPaths.length,
+                itemCount: pastResumes.length,
                 itemBuilder: (context, index) {
-                  final filePath = widget.pdfPaths[index];
-                  return FutureBuilder<FileStat>(
-                    future: _getFileStat(filePath),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        final fileStat = snapshot.data!;
-                        final modifiedDate = DateFormat('yyyy-MM-dd HH:mm')
-                            .format(fileStat.modified);
-                        final fileName = filePath.split('/').last;
+                  final resumeData = pastResumes[index];
+                  final modifiedDate = DateFormat('yyyy-MM-dd HH:mm')
+                      .format(DateTime.now()); // Placeholder for modified date
+                  final fileName = resumeData.name;
 
-                        return _buildProjectCard(
-                          fileName: fileName,
-                          modifiedDate: modifiedDate,
-                          filePath: filePath,
-                        );
-                      } else {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                    },
+                  return _buildResumeCard(
+                    fileName: fileName,
+                    modifiedDate: modifiedDate,
+                    resumeData: resumeData,
                   );
                 },
               ),
@@ -53,26 +48,30 @@ class _HomeScreenState extends State<HomeScreen> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => AddNewResume(),
+                builder: (context) => const AddNewResume(),
               ));
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
 
-  Future<FileStat> _getFileStat(String filePath) async {
-    final file = File(filePath);
-    return await file.stat();
-  }
-
-  Widget _buildProjectCard({
+  Widget _buildResumeCard({
     required String fileName,
     required String modifiedDate,
-    required String filePath,
+    required ResumeData resumeData,
   }) {
     return GestureDetector(
-      onTap: () => _openPDF(filePath),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PDFPreviewPage(
+              resumeData: resumeData,
+            ),
+          ),
+        );
+      },
       child: Card(
         elevation: 4,
         margin: const EdgeInsets.all(8),
@@ -99,9 +98,5 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
-  }
-
-  void _openPDF(String filePath) {
-    OpenFile.open(filePath);
   }
 }

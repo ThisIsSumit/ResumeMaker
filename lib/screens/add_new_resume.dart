@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:resume_pdf_app/data/pdfpaths.dart';
+import 'package:resume_pdf_app/data/pastprojects.dart';
 import 'package:resume_pdf_app/models/exrtaInput_screen.dart';
 import 'package:resume_pdf_app/models/resume_secrions.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -11,16 +11,13 @@ import 'package:resume_pdf_app/screens/por_intput_screen.dart';
 import 'package:resume_pdf_app/models/project_input.dart';
 
 class AddNewResume extends StatefulWidget {
-  const AddNewResume({ super.key});
-  
+  const AddNewResume({super.key});
 
   @override
   _AddNewResumeState createState() => _AddNewResumeState();
 }
 
 class _AddNewResumeState extends State<AddNewResume> {
-
-
   // Controllers for each input field
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -112,13 +109,14 @@ class _AddNewResumeState extends State<AddNewResume> {
                     _summaryController.clear();
                     _skillController.clear();
 
-                    pdfPaths.add(pdfPath);
+                    pastResumes.add(_resumeData);
                   });
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => PDFPreviewPage(
-                          resumeData: _resumeData,),
+                        resumeData: _resumeData,
+                      ),
                     ),
                   );
                 },

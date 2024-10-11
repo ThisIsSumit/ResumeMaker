@@ -1,9 +1,7 @@
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
-import 'package:resume_pdf_app/data/pdfpaths.dart';
 import 'package:resume_pdf_app/models/resume_secrions.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:resume_pdf_app/screens/home_screen.dart';
@@ -11,23 +9,24 @@ import 'package:resume_pdf_app/screens/home_screen.dart';
 class PDFPreviewPage extends StatelessWidget {
   final ResumeData resumeData;
 
-
-  const PDFPreviewPage(
-      {super.key, required this.resumeData,});
+  const PDFPreviewPage({super.key, required this.resumeData});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('PDF Preview'),
-        leading: IconButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => HomeScreen(pdfPaths: pdfPaths)));
-            },
-            icon: Icon(Icons.arrow_back)),
+        leading:IconButton(
+          onPressed: () {
+            // Navigate to HomeScreen and remove PDFPreviewPage from stack
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) =>  HomeScreen()),
+              (Route<dynamic> route) => false, // Removes all previous routes
+            );
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
       ),
       body: PdfPreview(
         build: (format) => _generateResumePdf(format),

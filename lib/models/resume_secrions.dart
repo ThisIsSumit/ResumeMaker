@@ -18,7 +18,9 @@ class ResumeData {
     required this.skills,
     required this.projects,
     required this.positionsOfResponsibility,
-    required this.extracurriculars, required List experiences, required List education,
+    required this.extracurriculars,
+    required List experiences,
+    required List education,
   });
 }
 
@@ -28,7 +30,8 @@ class Project {
   String? description;
   List<String> bullets;
 
-  Project({this.title, this.githubLink, this.description, required this.bullets});
+  Project(
+      {this.title, this.githubLink, this.description, required this.bullets});
 }
 
 class PoR {
@@ -42,3 +45,11 @@ class Extracurricular {
 
   Extracurricular({this.title});
 }
+
+class PastProjectCard {
+  PastProjectCard({required this.modifiedDate, required this.resumeData});
+  final DateTime modifiedDate;
+
+  final ResumeData resumeData;
+}
+  List<PastProjectCard> pastprojects = [];
