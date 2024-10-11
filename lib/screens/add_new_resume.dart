@@ -100,7 +100,7 @@ class _AddNewResumeState extends State<AddNewResume> {
               ElevatedButton(
                 child: const Text('Generate PDF'),
                 onPressed: () async {
-                  String pdfPath = await _generatePdf();
+                
                   setState(() {
                     _nameController.clear();
                     _emailController.clear();

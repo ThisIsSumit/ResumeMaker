@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:resume_pdf_app/data/pastprojects.dart';
 
 import 'package:resume_pdf_app/screens/home_screen.dart';
 

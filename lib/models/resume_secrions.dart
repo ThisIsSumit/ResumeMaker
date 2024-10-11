@@ -46,10 +46,3 @@ class Extracurricular {
   Extracurricular({this.title});
 }
 
-class PastProjectCard {
-  PastProjectCard({required this.modifiedDate, required this.resumeData});
-  final DateTime modifiedDate;
-
-  final ResumeData resumeData;
-}
-  List<PastProjectCard> pastprojects = [];
