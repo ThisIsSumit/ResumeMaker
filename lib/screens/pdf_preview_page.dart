@@ -10,10 +10,10 @@ import 'package:resume_pdf_app/screens/home_screen.dart';
 
 class PDFPreviewPage extends StatelessWidget {
   final ResumeData resumeData;
-  final bool isDarkMode;
+
 
   const PDFPreviewPage(
-      {super.key, required this.resumeData, required this.isDarkMode});
+      {super.key, required this.resumeData,});
 
   @override
   Widget build(BuildContext context) {

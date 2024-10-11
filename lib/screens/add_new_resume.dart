@@ -11,8 +11,8 @@ import 'package:resume_pdf_app/screens/por_intput_screen.dart';
 import 'package:resume_pdf_app/models/project_input.dart';
 
 class AddNewResume extends StatefulWidget {
-  const AddNewResume({required this.isDarkMode, super.key});
-   final bool isDarkMode ;
+  const AddNewResume({ super.key});
+  
 
   @override
   _AddNewResumeState createState() => _AddNewResumeState();
@@ -118,7 +118,7 @@ class _AddNewResumeState extends State<AddNewResume> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => PDFPreviewPage(
-                          resumeData: _resumeData, isDarkMode: widget.isDarkMode),
+                          resumeData: _resumeData,),
                     ),
                   );
                 },

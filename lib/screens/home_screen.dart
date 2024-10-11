@@ -16,12 +16,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    bool _isDarkMode = false;
-
     return Scaffold(
-      appBar: AppBar(title: const Text('My Resumes'), actions: [
-      
-      ]),
+      appBar: AppBar(title: const Text('My Resumes'), actions: []),
       body: widget.pdfPaths.isEmpty
           ? const Center(child: Text('No projects found.'))
           : Padding(
@@ -57,9 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => AddNewResume(
-                  isDarkMode: _isDarkMode,
-                ),
+                builder: (context) => AddNewResume(),
               ));
         },
         child: Icon(Icons.add),
