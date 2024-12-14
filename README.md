@@ -6,6 +6,9 @@ This Flutter project allows users to create customized resumes and download them
 
 This project is a starting point for a Flutter application to generate resumes in PDF format.
 
+### [Video Link](https://youtu.be/FS4jjq37Z1w?si=ugpoaFuHlOuuz4Tp).
+
+
 ### Prerequisites
 
 Ensure that you have the following installed:
